@@ -1,6 +1,7 @@
 def main():
-    print("Hello GitHub 🚀")
-    print("This repository is ready to use.")
+    name = input("Enter your name: ")
+    print(f"Hello, {name}! 👋")
+    print("You just ran your first Python program from GitHub.")
 
 if __name__ == "__main__":
     main()
