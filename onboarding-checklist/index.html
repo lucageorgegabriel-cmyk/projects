@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Onboarding Checklist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .user-info {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #0f3460;
+        }
+
+        .user-info h2 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .user-info input {
+            width: 100%;
+            padding: 10px 14px;
+            margin-bottom: 10px;
+            border: 1px solid #0f3460;
+            border-radius: 8px;
+            background: #1a1a2e;
+            color: #e0e0e0;
+            font-size: 14px;
+        }
+
+        .user-info input:focus {
+            outline: none;
+            border-color: #00d4ff;
+        }
+
+        .checklist {
+            background: #16213e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #0f3460;
+        }
+
+        .checklist h2 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            transition: background 0.2s;
+        }
+
+        .item:hover {
+            background: #1a1a2e;
+        }
+
+        .item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 14px;
+            cursor: pointer;
+            accent-color: #00d4ff;
+        }
+
+        .item label {
+            cursor: pointer;
+            font-size: 15px;
+            flex: 1;
+        }
+
+        .item.checked label {
+            text-decoration: line-through;
+            color: #666;
+        }
+
+        .progress-bar {
+            background: #1a1a2e;
+            border-radius: 10px;
+            height: 24px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            border: 1px solid #0f3460;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #0f3460);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .status {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            display: none;
+        }
+
+        .status.complete {
+            display: block;
+            background: #0a3d2a;
+            color: #00ff88;
+            border: 1px solid #00ff88;
+        }
+
+        .btn-reset {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 30px;
+            background: #e94560;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .btn-reset:hover {
+            background: #c73e54;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IT Onboarding Checklist</h1>
+        <p class="subtitle">New employee setup tracker</p>
+
+        <div class="user-info">
+            <h2>User Details</h2>
+            <input type="text" id="userName" placeholder="Employee name">
+            <input type="text" id="userAD" placeholder="AD Username">
+            <input type="email" id="userEmail" placeholder="Email address">
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill">0%</div>
+        </div>
+
+        <div class="checklist">
+            <h2>Software & Access</h2>
+            <div class="item">
+                <input type="checkbox" id="check-ad" onchange="updateProgress()">
+                <label for="check-ad">User AD - Active Directory account created</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" id="check-email" onchange="updateProgress()">
+                <label for="check-email">Email Address - Mailbox configured</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" id="check-rapid7" onchange="updateProgress()">
+                <label for="check-rapid7">Rapid7 - Security agent installed</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" id="check-laps" onchange="updateProgress()">
+                <label for="check-laps">LAPS - Local admin password configured</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" id="check-vpn" onchange="updateProgress()">
+                <label for="check-vpn">VPN - Client installed and configured</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" id="check-chrome" onchange="updateProgress()">
+                <label for="check-chrome">Google Chrome - Browser installed</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" id="check-teams" onchange="updateProgress()">
+                <label for="check-teams">Microsoft Teams - Installed and signed in</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" id="check-office" onchange="updateProgress()">
+                <label for="check-office">Office 365 - Suite installed and activated</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" id="check-adobe" onchange="updateProgress()">
+                <label for="check-adobe">Adobe Reader - PDF reader installed</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" id="check-sap" onchange="updateProgress()">
+                <label for="check-sap">SAP Analysis - Client installed</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" id="check-anydesk" onchange="updateProgress()">
+                <label for="check-anydesk">AnyDesk - Remote desktop installed</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" id="check-7zip" onchange="updateProgress()">
+                <label for="check-7zip">7-Zip - Archive tool installed</label>
+            </div>
+        </div>
+
+        <div class="status" id="statusComplete">
+            All tasks completed! Onboarding is done.
+        </div>
+
+        <button class="btn-reset" onclick="resetAll()">Reset Checklist</button>
+    </div>
+
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.item input[type="checkbox"]');
+            const total = checkboxes.length;
+            let checked = 0;
+
+            checkboxes.forEach(function(cb) {
+                const item = cb.closest('.item');
+                if (cb.checked) {
+                    checked++;
+                    item.classList.add('checked');
+                } else {
+                    item.classList.remove('checked');
+                }
+            });
+
+            const percent = Math.round((checked / total) * 100);
+            const fill = document.getElementById('progressFill');
+            fill.style.width = percent + '%';
+            fill.textContent = percent + '%';
+
+            const status = document.getElementById('statusComplete');
+            if (checked === total) {
+                status.classList.add('complete');
+            } else {
+                status.classList.remove('complete');
+            }
+
+            saveState();
+        }
+
+        function resetAll() {
+            const checkboxes = document.querySelectorAll('.item input[type="checkbox"]');
+            checkboxes.forEach(function(cb) {
+                cb.checked = false;
+                cb.closest('.item').classList.remove('checked');
+            });
+            document.getElementById('userName').value = '';
+            document.getElementById('userAD').value = '';
+            document.getElementById('userEmail').value = '';
+            updateProgress();
+            localStorage.removeItem('onboardingState');
+        }
+
+        function saveState() {
+            const state = {
+                userName: document.getElementById('userName').value,
+                userAD: document.getElementById('userAD').value,
+                userEmail: document.getElementById('userEmail').value,
+                checks: {}
+            };
+            const checkboxes = document.querySelectorAll('.item input[type="checkbox"]');
+            checkboxes.forEach(function(cb) {
+                state.checks[cb.id] = cb.checked;
+            });
+            localStorage.setItem('onboardingState', JSON.stringify(state));
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem('onboardingState');
+            if (saved) {
+                const state = JSON.parse(saved);
+                document.getElementById('userName').value = state.userName || '';
+                document.getElementById('userAD').value = state.userAD || '';
+                document.getElementById('userEmail').value = state.userEmail || '';
+                if (state.checks) {
+                    Object.keys(state.checks).forEach(function(id) {
+                        const cb = document.getElementById(id);
+                        if (cb) {
+                            cb.checked = state.checks[id];
+                        }
+                    });
+                }
+                updateProgress();
+            }
+        }
+
+        document.getElementById('userName').addEventListener('input', saveState);
+        document.getElementById('userAD').addEventListener('input', saveState);
+        document.getElementById('userEmail').addEventListener('input', saveState);
+
+        loadState();
+    </script>
+</body>
+</html>
